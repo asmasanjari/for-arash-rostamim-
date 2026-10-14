@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برای ارشیم</title>
+
+    <style>
+        :root {
+            --burgundy: #4b071b;
+            --deep: #160208;
+            --gold: #c7a46a;
+            --gold-light: #ead5a3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--deep);
+            color: var(--gold-light);
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        /* صفحه اول */
+
+        #firstPage {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: radial-gradient(ellipse at center, #4b071b 0%, #26030d 48%, #100106 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro {
+            width: min(100%, 440px);
+            text-align: center;
+            padding: 45px 25px;
+            border: 1px solid rgba(199, 164, 106, .45);
+            border-radius: 3px;
+            position: relative;
+            background: rgba(15, 1, 6, .32);
+            box-shadow: 0 0 65px rgba(0, 0, 0, .35);
+        }
+
+        .intro::before,
+        .intro::after {
+            content: "";
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            border-color: var(--gold);
+            border-style: solid;
+        }
+
+        .intro::before {
+            top: -1px;
+            right: -1px;
+            border-width: 1px 1px 0 0;
+        }
+
+        .intro::after {
+            bottom: -1px;
+            left: -1px;
+            border-width: 0 0 1px 1px;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: 11px;
+            letter-spacing: 4px;
+            margin-bottom: 25px;
+            direction: ltr;
+        }
+
+        .intro h1 {
+            font-size: clamp(27px, 7vw, 38px);
+            font-weight: 400;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .intro .subtitle {
+            color: #c6aeb4;
+            font-size: 13px;
+            line-height: 2;
+            margin-bottom: 27px;
+        }
+
+        .date {
+            font-size: 12px;
+            color: var(--gold);
+            letter-spacing: 3px;
+            direction: ltr;
+            margin-bottom: 32px;
+        }
+
+        .voice-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 13px;
+            width: 100%;
+            padding: 14px 18px;
+            margin-bottom: 22px;
+            color: var(--gold-light);
+            border: 1px solid rgba(199, 164, 106, .42);
+            background: rgba(255, 255, 255, .025);
+            border-radius: 2px;
+            transition: background .3s, border-color .3s;
+        }
+
+        .voice-button:hover {
+            background: rgba(199, 164, 106, .09);
+            border-color: var(--gold);
+        }
+
+        .sound-bars {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            height: 19px;
+            direction: ltr;
+        }
+
+        .sound-bars span {
+            display: block;
+            width: 2px;
+            height: 5px;
+            border-radius: 2px;
+            background: var(--gold);
+        }
+
+        .sound-bars.playing span {
+            animation: soundWave .65s ease-in-out infinite alternate;
+        }
+
+        .sound-bars span:nth-child(2) {
+            animation-delay: .12s;
+        }
+
+        .sound-bars span:nth-child(3) {
+            animation-delay: .28s;
+        }
+
+        .sound-bars span:nth-child(4) {
+            animation-delay: .08s;
+        }
+
+        .sound-bars span:nth-child(5) {
+            animation-delay: .2s;
+        }
+
+        @keyframes soundWave {
+            from {
+                height: 4px;
+            }
+            to {
+                height: 18px;
+            }
+        }
+
+        /* دکمه استارت */
+
+        .start-button {
+            position: relative;
+            width: 100%;
+            padding: 17px 20px;
+            border: 1px solid var(--gold);
+            border-radius: 2px;
+            color: #1b0809;
+            background: linear-gradient(110deg, #a7834b, #ead5a3 48%, #b18b50);
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            direction: ltr;
+            overflow: hidden;
+            transition: transform .3s, box-shadow .3s;
+        }
+
+        .start-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(
+                    100deg,
+                    transparent,
+                    rgba(255, 255, 255, .5),
+                    transparent
+            );
+            transform: skewX(-20deg);
+            transition: left .7s;
+        }
+
+        .start-button:hover::before {
+            left: 150%;
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 28px rgba(199, 164, 106, .17);
+        }
+
+        .start-button:active {
+            transform: scale(.985);
+        }
+
+        .small-note {
+            margin-top: 23px;
+            font-size: 10px;
+            color: #9c7d82;
+            letter-spacing: 1px;
+        }
+
+        /* صفحه دوم */
+
+        #heartPage {
+            display: none;
+            min-height: 100vh;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 25px 12px 28px;
+        }
+
+        #heartPage.visible {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .heart-heading {
+            position: relative;
+            z-index: 2;
+            padding-top: 12px;
+            color: #c7a46a;
+            font-size: clamp(17px, 4vw, 23px);
+            font-weight: 400;
+            line-height: 1.9;
+        }
+
+        .heart-subheading {
+            color: #806d72;
+            font-size: 10px;
+            margin-top: 5px;
+            letter-spacing: 2px;
+            direction: ltr;
+        }
+
+        .canvas-wrap {
+            width: 100%;
+            max-width: 720px;
+            flex: 1;
+            min-height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #heartCanvas {
+            display: block;
+            width: 100%;
+            height: min(72vh, 650px);
+            min-height: 380px;
+        }
+
+        .heart-caption {
+            color: #c7a46a;
+            font-size: 12px;
+            letter-spacing: 1px;
+            line-height: 2;
+            margin: 4px 0 18px;
+        }
+
+        .heart-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .heart-controls button {
+            padding: 11px 19px;
+            color: #c7a46a;
+            background: #080808;
+            border: 1px solid #51402a;
+            font-size: 11px;
+            transition: .25s;
+        }
+
+        .heart-controls button:hover {
+            border-color: #c7a46a;
+            background: #160d08;
+        }
+
+        @media (max-width: 480px) {
+            .intro {
+                padding: 37px 20px;
+            }
+
+            .canvas-wrap {
+                min-height: 350px;
+            }
+
+            #heartCanvas {
+                height: 58vh;
+                min-height: 350px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- صفحه اول -->
+<section id="firstPage">
+    <main class="intro">
+        <div class="eyebrow">A LITTLE WORLD FOR YOU</div>
+
+        <h1>برای ارشیم</h1>
+
+        <p class="subtitle">
+            یه چیزی هست که می‌خوام با چشمات ببینی<br>
+             و با قلبت حسش کنی ی چیزی که نمیشه ثابت کرد
+        </p>
+
+        <div class="date">27 · XI · 2003</div>
+
+        <audio id="voiceAudio" src="voice.mp3" preload="metadata"></audio>
+
+        <button class="voice-button" id="voiceButton" type="button">
+            <span class="sound-bars" id="soundBars" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span id="voiceLabel">اول اینو گوش کن</span>
+            <span id="voiceIcon">▶</span>
+        </button>
+
+        <button class="start-button" id="startButton" type="button">
+            START THE SURPRISE&nbsp; ↗
+        </button>
+
+        <div class="small-note">MADE WITH LOVE · JUST FOR YOU</div>
+    </main>
+</section>
+
+<!-- صفحه دوم: قلب از ابتدا نمایش داده نمی‌شود -->
+<section id="heartPage">
+    <h2 class="heart-heading"> In every universe, if I were born again</h2>
+    <p class="heart-subheading">I would still…</p>
+
+    <div class="canvas-wrap">
+        <canvas id="heartCanvas"></canvas>
+    </div>
+
+    <p class="heart-caption">My Man</p>
+    <audio
+            id="songAudio"
+            src="voice_msg_-8775661277135758343.mp3"
+            preload="auto"
+            autoplay
+            loop>
+    </audio>
+
+    <div class="heart-controls">
+        <button id="replayButton" type="button">دوباره دوباره یک بار فایده نداره ↻</button>
+    </div>
+</section>
+
+<script>
+    const firstPage = document.getElementById("firstPage");
+    const heartPage = document.getElementById("heartPage");
+
+    const voiceAudio = document.getElementById("voiceAudio");
+    const voiceButton = document.getElementById("voiceButton");
+    const voiceLabel = document.getElementById("voiceLabel");
+    const voiceIcon = document.getElementById("voiceIcon");
+    const soundBars = document.getElementById("soundBars");
+
+    const songAudio = document.getElementById("songAudio");
+    const songButton = document.getElementById("songButton");
+
+    const canvas = document.getElementById("heartCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let animationFrame = null;
+    let animationStart = 0;
+    let heartWords = [];
+    let heartPath = new Path2D();
+    let resizeTimer = null;
+
+    const phrases = [
+        "I LOVE YOU", "دوستت دارم", "TE AMO", "JE T'AIME",
+        "TI AMO", "ICH LIEBE DICH", "Я ТЕБЯ ЛЮБЛЮ", "愛してる",
+        "사랑해", "我爱你", "SENI SEVIYORUM", "EU TE AMO",
+        "أحبك", "Σ' ΑΓΑΠΩ", "मैं तुमसे प्यार करता हूँ",
+        "أنا أحبك", "MON AMOUR", "MI AMOR", "รักคุณ",
+        "ฉันรักคุณ", "TË DUA", "KALPANA", "ILY"
+    ];
+
+    /* پخش و توقف ویس */
+    voiceButton.addEventListener("click", async () => {
+        if (voiceAudio.paused) {
+            try {
+                await voiceAudio.play();
+            } catch (error) {
+                voiceLabel.textContent = "فایل voice.mp3 را بررسی کن";
+            }
+        } else {
+            voiceAudio.pause();
+        }
+    });
+
+    voiceAudio.addEventListener("play", () => {
+        soundBars.classList.add("playing");
+        voiceIcon.textContent = "Ⅱ";
+        voiceLabel.textContent = "دارم باهات حرف می‌زنم";
+    });
+
+    function resetVoiceButton() {
+        soundBars.classList.remove("playing");
+        voiceIcon.textContent = "▶";
+        voiceLabel.textContent = "صدای من برای تو";
+    }
+
+    voiceAudio.addEventListener("pause", resetVoiceButton);
+    voiceAudio.addEventListener("ended", resetVoiceButton);
+
+    /* رفتن به صفحه قلب */
+    document.getElementById("startButton").addEventListener("click", () => {
+        firstPage.style.display = "none";
+        heartPage.classList.add("visible");
+
+        resizeCanvas();
+        startHeartAnimation();
+
+        songAudio.play().catch(() => {
+            songButton.textContent = "▶ پخش آهنگ";
+        });
+    });
+
+    /* کنترل آهنگ */
+    songButton.addEventListener("click", async () => {
+        if (songAudio.paused) {
+            try {
+                await songAudio.play();
+            } catch (error) {
+                songButton.textContent = "فایل آهنگ را بررسی کن";
+            }
+        } else {
+            songAudio.pause();
+        }
+    });
+
+    songAudio.addEventListener("play", () => {
+        songButton.textContent = "Ⅱ توقف آهنگ";
+    });
+
+    songAudio.addEventListener("pause", () => {
+        songButton.textContent = "▶ پخش آهنگ";
+    });
+
+    songAudio.addEventListener("ended", () => {
+        songButton.textContent = "▶ پخش آهنگ";
+    });
+
+    /* اندازه بوم و ساخت مسیر قلب */
+    function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(rect.width * dpr);
+        canvas.height = Math.round(rect.height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        buildHeartWords(rect.width, rect.height);
+    }
+
+    function buildHeartPath(width, height) {
+        const scale = Math.min(width / 35, height / 32);
+        const cx = width / 2;
+        const cy = height / 2 + scale * 1.2;
+        const path = new Path2D();
+        const points = [];
+        const steps = 1000;
+
+        for (let i = 0; i <= steps; i++) {
+            const t = (i / steps) * Math.PI * 2;
+            const x = 16 * Math.pow(Math.sin(t), 3);
+            const y = 13 * Math.cos(t)
+                - 5 * Math.cos(2 * t)
+                - 2 * Math.cos(3 * t)
+                - Math.cos(4 * t);
+
+            points.push({x: cx + x * scale, y: cy - y * scale});
+        }
+
+        path.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+            path.lineTo(points[i].x, points[i].y);
+        }
+        path.closePath();
+
+        return {path, points, scale, cx, cy};
+    }
+
+    /* پیدا کردن پهنای واقعی قلب در هر ردیف و چیدن کلمات داخل آن */
+    function buildHeartWords(width, height) {
+        heartWords = [];
+
+        const heart = buildHeartPath(width, height);
+        heartPath = heart.path;
+
+        // فاصله کمتر باعث می‌شود تمام سطح قلب پر از نوشته شود.
+        const stepX = width < 450 ? 39 : 46;
+        const stepY = width < 450 ? 13 : 15;
+        const top = Math.min(...heart.points.map(point => point.y));
+        const bottom = Math.max(...heart.points.map(point => point.y));
+        let phraseIndex = 0;
+        let rowNumber = 0;
+
+        for (let y = top + 3; y <= bottom - 2; y += stepY) {
+            const intersections = [];
+
+            // تقاطع خط افقی با لبه‌های قلب، برای به‌دست‌آوردن عرض دقیق هر ردیف
+            for (let i = 0; i < heart.points.length - 1; i++) {
+                const a = heart.points[i];
+                const b = heart.points[i + 1];
+
+                if ((a.y <= y && b.y > y) || (b.y <= y && a.y > y)) {
+                    const x = a.x + ((y - a.y) * (b.x - a.x)) / (b.y - a.y);
+                    intersections.push(x);
+                }
+            }
+
+            intersections.sort((a, b) => a - b);
+            if (intersections.length < 2) continue;
+
+            const left = intersections[0] + 3;
+            const right = intersections[intersections.length - 1] - 3;
+            const row = [];
+            const offset = rowNumber % 2 ? stepX / 2 : 0;
+
+            for (let x = left + offset; x <= right; x += stepX) {
+                row.push({
+                    x,
+                    y,
+                    text: phrases[phraseIndex % phrases.length],
+                    size: width < 450 ? 8.5 : 10
+                });
+                phraseIndex++;
+            }
+
+            // ردیف‌های جایگزین جهت متفاوت دارند تا چیدمان طبیعی‌تر شود.
+            if (rowNumber % 2 === 1) row.reverse();
+            heartWords.push(...row);
+            rowNumber++;
+        }
+    }
+
+    /* انیمیشن: کلمه‌ها یکی‌یکی ظاهر می‌شوند و قلب را کامل می‌کنند */
+    function startHeartAnimation() {
+        if (animationFrame) cancelAnimationFrame(animationFrame);
+
+        resizeCanvas();
+
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        if (!width || !height || heartWords.length === 0) return;
+
+        animationStart = performance.now();
+
+        const delayPerWord = 45;
+        const fadeDuration = 1000;
+
+        function animate(now) {
+            const elapsed = now - animationStart;
+
+            ctx.clearRect(0, 0, width, height);
+
+            ctx.save();
+            ctx.clip(heartPath);
+
+            heartWords.forEach((word, index) => {
+                const startAt = index * delayPerWord;
+                const progress = Math.max(0, Math.min(1, (elapsed - startAt) / fadeDuration));
+                if (progress <= 0) return;
+
+                ctx.save();
+                ctx.globalAlpha = progress;
+                ctx.font = `bold ${word.size}px Arial, Tahoma, sans-serif`;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.shadowColor = "#ff174f";
+                ctx.shadowBlur = 6;
+                ctx.fillStyle = index % 5 === 0 ? "#ff315f" : "#d91b4b";
+                ctx.fillText(word.text, word.x, word.y);
+                ctx.restore();
+            });
+
+            ctx.restore();
+
+            // وقتی نوشته‌ها کامل شدند، یک خط نورانی ظریف مرز قلب را واضح می‌کند.
+            const totalDuration = heartWords.length * delayPerWord + fadeDuration;
+            if (elapsed >= totalDuration) {
+                ctx.save();
+                ctx.strokeStyle = "rgba(255, 35, 88, 0.75)";
+                ctx.lineWidth = 1;
+                ctx.shadowColor = "#ff174f";
+                ctx.shadowBlur = 8;
+                ctx.stroke(heartPath);
+                ctx.restore();
+            }
+
+            if (elapsed < totalDuration) {
+                animationFrame = requestAnimationFrame(animate);
+            } else {
+                animationFrame = null;
+            }
+        }
+
+        animationFrame = requestAnimationFrame(animate);
+    }
+
+    document.getElementById("replayButton").addEventListener("click", () => {
+        startHeartAnimation();
+    });
+
+    window.addEventListener("resize", () => {
+        if (!heartPage.classList.contains("visible")) return;
+
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            resizeCanvas();
+            startHeartAnimation();
+        }, 180);
+    });
+</script>
+
+</body>
+</html>
+
